@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http'
 export class PhoneService {
 
   constructor(private http: HttpClient) { }
+
   // data tuoteluetteloon
   getAllProducts(): any {
     const products = this.http.get('../assets/puhelinten-tuotetiedot/phones/phones.json');
