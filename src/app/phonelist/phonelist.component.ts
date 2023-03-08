@@ -11,7 +11,8 @@ import { Phone } from '../phone';
 export class PhonelistComponent {
   productList: Phone[] = [];
   
-  constructor (private phoneService: PhoneService) {}
+  constructor (private http: HttpClient, 
+    private phoneService: PhoneService) {}
   // Data haetaan heti kun komponentti ladataan
   ngOnInit(): void {
     this.getProducts();
@@ -20,11 +21,12 @@ export class PhonelistComponent {
   // Tallennetaan phoneServicen funktiolla getAllProducts() 
   // haettu data muuttujaan productList
   getProducts(): any {
-    this.phoneService.getAllProducts().subscribe((data) => {
+    this.phoneService.getAllProducts().subscribe(
+      (data: Phone[]) => {
       this.productList = data;
       // this.productList.sort((a, b) => (a.age < b.age)) ? 1
     },
-    (error) => {
+    (error: any) => {
       console.log('http-error:');
       console.log(error);
     });
