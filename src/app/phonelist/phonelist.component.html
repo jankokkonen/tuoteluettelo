@@ -1,4 +1,10 @@
-<!-- <h1>moroo</h1>
-<div *ngFor="let product of productList" >
-    <span>{{ product.name }}</span>
-</div> -->
+<section class="container" *ngFor="let product of productList" >
+    <figure>
+        <img [src]="'../../assets/puhelinten-tuotetiedot/' + product.imageUrl" alt="Product image">
+    </figure>
+    
+    <article>
+        <a>{{ product.name }}</a>
+        <p>{{ product.snippet }}</p>
+    </article>
+</section>
