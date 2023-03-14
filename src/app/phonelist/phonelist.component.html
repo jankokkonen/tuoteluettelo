@@ -1,10 +1,16 @@
-<section class="container" *ngFor="let product of productList" >
-    <figure>
-        <img [src]="'../../assets/puhelinten-tuotetiedot/' + product.imageUrl" alt="Product image">
-    </figure>
-    
-    <article>
-        <a>{{ product.name }}</a>
-        <p>{{ product.snippet }}</p>
-    </article>
+<app-phone-search (searchTextChanged)="onSearchTextEntered($event)"></app-phone-search>
+<ng-container *ngFor="let product of productList">
+<section class="container">
+    <div *ngIf=" searchText === '' || product.name.toLowerCase().includes(searchText) ">
+        <div>
+        <figure>
+            <img [src]="'../../assets/puhelinten-tuotetiedot/' + product.imageUrl" alt="Product image">
+        </figure>
+        <article>
+            <a>{{ product.name }}</a>
+            <p>{{ product.snippet }}</p>
+        </article>
+    </div>
+    </div>
 </section>
+</ng-container>

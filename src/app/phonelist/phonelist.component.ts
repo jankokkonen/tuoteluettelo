@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PhoneService } from '../phone.service';
 import { HttpClient } from '@angular/common/http';
 import { Phone } from '../phone';
@@ -8,13 +8,14 @@ import { Phone } from '../phone';
   templateUrl: './phonelist.component.html',
   styleUrls: ['./phonelist.component.scss']
 })
-export class PhonelistComponent {
+export class PhonelistComponent implements OnInit{
   productList: Phone[] = [];
+  term: string = '';
   
   constructor (private http: HttpClient, 
     private phoneService: PhoneService) {}
-  // Data haetaan heti kun komponentti ladataan
-  ngOnInit(): void {
+    // Data haetaan heti kun komponentti ladataan
+    ngOnInit(): void {
     this.getProducts();
   }
 
@@ -30,5 +31,13 @@ export class PhonelistComponent {
       console.log('http-error:');
       console.log(error);
     });
+  }
+  // tähän tuodaan hakusana phone-search komponentista
+  searchText: string = '';
+
+
+  onSearchTextEntered(searchValue: string) {
+    this.searchText = searchValue;
+    //console.log(this.searchText);
   }
 }

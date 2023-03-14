@@ -1,1 +1,5 @@
-<p>phone-search works!</p>
+<div class="container">
+    <span>Search:</span>
+    <br>
+    <input type="text" [(ngModel)]="enterSearchValue" (input)="onSearchTextChanged()">
+</div>
