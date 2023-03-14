@@ -1,7 +1,11 @@
 section {
-    display: flex;
-    border-radius: 5px;
     margin-bottom: 10px;
+}
+.product {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 10px 30px;
+    display: flex;
 }
 
 section img {
@@ -10,5 +14,5 @@ section img {
 }
 
 article {
-    padding: 15px;
+    padding: 40px 0 0 40px;
 }

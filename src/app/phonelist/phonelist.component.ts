@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PhoneService } from '../phone.service';
 import { HttpClient } from '@angular/common/http';
 import { Phone } from '../phone';
@@ -10,11 +10,11 @@ import { Phone } from '../phone';
 })
 export class PhonelistComponent implements OnInit{
   productList: Phone[] = [];
-  term: string = '';
   
   constructor (private http: HttpClient, 
     private phoneService: PhoneService) {}
     // Data haetaan heti kun komponentti ladataan
+
     ngOnInit(): void {
     this.getProducts();
   }
@@ -25,13 +25,24 @@ export class PhonelistComponent implements OnInit{
     this.phoneService.getAllProducts().subscribe(
       (data: Phone[]) => {
       this.productList = data;
-      // this.productList.sort((a, b) => (a.age < b.age)) ? 1
+      this.sortProducts();
     },
     (error: any) => {
       console.log('http-error:');
       console.log(error);
     });
   }
+
+  sortProducts() {
+    if (this.sorting === 'asc') {
+      this.productList.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (this.sorting === 'newest') {
+      this.productList.sort((a, b) => a.age - b.age);
+    }
+  }
+
+
+
   // tähän tuodaan hakusana phone-search komponentista
   searchText: string = '';
 
@@ -40,4 +51,13 @@ export class PhonelistComponent implements OnInit{
     this.searchText = searchValue;
     //console.log(this.searchText);
   }
+
+  sorting: string = '';
+
+  
+  onSortingChanged(sortOrder: string) {
+    this.sorting = sortOrder;
+    this.sortProducts();
+    console.log(this.sorting)
+}
 }

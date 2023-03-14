@@ -1,16 +1,20 @@
-<app-phone-search (searchTextChanged)="onSearchTextEntered($event)"></app-phone-search>
+<app-phone-search 
+  (searchTextChanged)="onSearchTextEntered($event)"
+  (sortingChanged)="onSortingChanged($event)">
+</app-phone-search>
 <ng-container *ngFor="let product of productList">
 <section class="container">
-    <div *ngIf=" searchText === '' || product.name.toLowerCase().includes(searchText) ">
-        <div>
-        <figure>
-            <img [src]="'../../assets/puhelinten-tuotetiedot/' + product.imageUrl" alt="Product image">
-        </figure>
-        <article>
-            <a>{{ product.name }}</a>
-            <p>{{ product.snippet }}</p>
-        </article>
-    </div>
+    <div class="product" *ngIf="product.name.toLowerCase().split(' ')[0].startsWith(searchText)">
+            <figure>
+                <img [src]="'../../assets/puhelinten-tuotetiedot/' + 
+                product.imageUrl" alt="Product image">
+            </figure>
+            <article>
+                <a>{{ product.name }}</a>
+                <p>{{ product.snippet }}</p>
+                <!-- <p>{{ product.age }}</p> -->
+            </article>
     </div>
 </section>
 </ng-container>
+

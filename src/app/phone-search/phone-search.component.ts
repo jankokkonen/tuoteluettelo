@@ -8,28 +8,29 @@ import { Phone } from '../phone';
   styleUrls: ['./phone-search.component.scss']
 })
 export class PhoneSearchComponent implements OnInit {
-  products$!: Observable<Phone[]>;
-  private searchTerms = new Subject<string>();
-
-  constructor (private phoneService: PhoneService) {}
-
-  @Output()
-  search(term: string): void {
-    this.searchTerms.next(term);
-  }
-  
-  ngOnInit(): void {
-  }
-  //tallennetaan hakukentän string
+  sortOrder = 'asc'
   enterSearchValue: string = '';
 
+  constructor () {}
+
+  ngOnInit(): void {
+  }
+
   // määritetään output ja EventEmitter
-  @Output()
+  @Output() 
   searchTextChanged: EventEmitter<string> = new EventEmitter<string>();
 
   // emit enterSearchValue
   onSearchTextChanged() {
     this.searchTextChanged.emit(this.enterSearchValue);
+    console.log(this.enterSearchValue);
+  }
+
+  @Output() 
+  sortingChanged: EventEmitter<string> = new EventEmitter<string>();
+  
+  onSortingChanged() {
+    this.sortingChanged.emit(this.sortOrder);
   }
 }
 
